@@ -10,6 +10,9 @@ class CategoriesScreen extends StatefulWidget {
 }
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
+  var _categoriesNameController = TextEditingController();
+  var _categoriesDescriptionController = TextEditingController();
+
   _showFormDialog(BuildContext context) {
     return showDialog(
         context: context,
@@ -26,7 +29,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               ),
               FlatButton(
                 color: Colors.blue,
-                onPressed: () {},
+                onPressed: () {
+                  print("Categories ${_categoriesNameController.text}");
+                  print("Description ${_categoriesDescriptionController.text}");
+                },
                 child: Text("Save"),
               ),
             ],
@@ -35,9 +41,17 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               child: Column(
                 children: [
                   TextField(
+                    controller: _categoriesNameController,
                     decoration: InputDecoration(
                       hintText: "Write a Category",
                       labelText: "Category",
+                    ),
+                  ),
+                  TextField(
+                    controller: _categoriesDescriptionController,
+                    decoration: InputDecoration(
+                      hintText: "Write the Description",
+                      labelText: "Description",
                     ),
                   ),
                 ],
