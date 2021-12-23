@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_sqflite/models/category.dart';
+import 'package:flutter_todo_sqflite/services/category_service.dart';
 
 import 'home_screen.dart';
 
@@ -12,6 +14,9 @@ class CategoriesScreen extends StatefulWidget {
 class _CategoriesScreenState extends State<CategoriesScreen> {
   var _categoriesNameController = TextEditingController();
   var _categoriesDescriptionController = TextEditingController();
+
+  var _category = Category();
+  var _categoryService = CategoryService();
 
   _showFormDialog(BuildContext context) {
     return showDialog(
@@ -30,8 +35,9 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               FlatButton(
                 color: Colors.blue,
                 onPressed: () {
-                  print("Categories ${_categoriesNameController.text}");
-                  print("Description ${_categoriesDescriptionController.text}");
+                  _category.name = _categoriesNameController.text;
+                  _category.description = _categoriesDescriptionController.text;
+                  _categoryService.saveCategory(_category);
                 },
                 child: Text("Save"),
               ),
